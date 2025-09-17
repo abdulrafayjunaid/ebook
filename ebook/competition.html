@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competitions - Ebook Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/competition.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">Ebook</div>
+        <div class="links">
+            <a href="events.html">Events</a>
+            <a href="#">Contact us</a>
+            <a href="index.html">Home</a>
+            <a href="about.html">About us</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+            <a href="user/dashboard.html">Dashboard</a>
+            <a href="">Categories</a>
+            <a href="competition.html">Competition</a>
+            <a href="cart.html">cart</a>
+        </div>
+    </nav>
+    
+    <div class="competitions-container">
+        <div class="page-header">
+            <h1>Writing Competitions</h1>
+            <p>Showcase your writing skills, compete with other talented authors, and win amazing prizes!</p>
+        </div>
+        
+        <div class="competition-grid">
+            <!-- Competition 1 -->
+            <div class="competition-card">
+                <div class="card-header">
+                    <h3>Short Story Challenge</h3>
+                    <div class="status-badge active">Active</div>
+                </div>
+                <div class="card-body">
+                    <div class="topic">
+                        <h4>Topic</h4>
+                        <p>"A unexpected discovery in an old library"</p>
+                    </div>
+                    <div class="rules">
+                        <h4>Rules</h4>
+                        <ul>
+                            <li>Word count: 1,500 - 3,000 words</li>
+                            <li>Original, unpublished work only</li>
+                            <li>No plagiarism</li>
+                            <li>Submit in PDF or DOCX format</li>
+                        </ul>
+                    </div>
+                    <div class="timer">
+                        <h4>Time Remaining</h4>
+                        <div class="countdown" id="countdown-1">5d 12h 30m 15s</div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="prize">Prize: $500</div>
+                    <button class="btn btn-primary" onclick="openModal('short-story')">Submit Entry</button>
+                </div>
+            </div>
+            
+            <!-- Competition 2 -->
+            <div class="competition-card">
+                <div class="card-header">
+                    <h3>Poetry Contest</h3>
+                    <div class="status-badge active">Active</div>
+                </div>
+                <div class="card-body">
+                    <div class="topic">
+                        <h4>Topic</h4>
+                        <p>"The sound of silence"</p>
+                    </div>
+                    <div class="rules">
+                        <h4>Rules</h4>
+                        <ul>
+                            <li>Maximum 40 lines</li>
+                            <li>Any poetry form accepted</li>
+                            <li>Original work only</li>
+                            <li>Submit in PDF or DOCX format</li>
+                        </ul>
+                    </div>
+                    <div class="timer">
+                        <h4>Time Remaining</h4>
+                        <div class="countdown" id="countdown-2">3d 06h 45m 22s</div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="prize">Prize: $300</div>
+                    <button class="btn btn-primary" onclick="openModal('poetry')">Submit Entry</button>
+                </div>
+            </div>
+            
+            <!-- Competition 3 -->
+            <div class="competition-card">
+                <div class="card-header">
+                    <h3>Essay Competition</h3>
+                    <div class="status-badge">Coming Soon</div>
+                </div>
+                <div class="card-body">
+                    <div class="topic">
+                        <h4>Topic</h4>
+                        <p>"The future of digital reading"</p>
+                    </div>
+                    <div class="rules">
+                        <h4>Rules</h4>
+                        <ul>
+                            <li>Word count: 2,000 - 4,000 words</li>
+                            <li>Well-researched and cited</li>
+                            <li>Original work only</li>
+                            <li>Submit in PDF or DOCX format</li>
+                        </ul>
+                    </div>
+                    <div class="timer">
+                        <h4>Starts In</h4>
+                        <div class="countdown" id="countdown-3">12d 18h 05m 40s</div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="prize">Prize: $750</div>
+                    <button class="btn btn-secondary" disabled>Notify Me</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Submission Modal -->
+    <div class="modal" id="submission-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="modal-header">
+                <h2>Submit Your Entry</h2>
+                <p>Please fill out the form below to enter the competition</p>
+            </div>
+            <form id="submission-form">
+                <div class="form-group">
+                    <label for="author-name">Full Name</label>
+                    <input type="text" id="author-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="author-email">Email Address</label>
+                    <input type="email" id="author-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="entry-title">Entry Title</label>
+                    <input type="text" id="entry-title" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Entry</button>
+            </form>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-content">
+          <h2 class="logo">Ebook World</h2>
+          <p>Dive into the world of ebooks with us. Read, learn, and explore.</p>
+          <div class="footer-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-discord"></i></a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Ebook World | All Rights Reserved</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Countdown timers
+        function updateCountdowns() {
+            // Set competition end dates (for demo, using fixed dates)
+            const endDate1 = new Date('2025-02-15T23:59:59').getTime();
+            const endDate2 = new Date('2025-02-12T23:59:59').getTime();
+            const startDate3 = new Date('2025-02-25T00:00:00').getTime();
+            
+            const now = new Date().getTime();
+            
+            // Calculate time differences
+            const distance1 = endDate1 - now;
+            const distance2 = endDate2 - now;
+            const distance3 = startDate3 - now;
+            
+            // Update countdown displays
+            if (distance1 > 0) {
+                document.getElementById('countdown-1').innerHTML = formatCountdown(distance1);
+            } else {
+                document.getElementById('countdown-1').innerHTML = "Competition Ended";
+            }
+            
+            if (distance2 > 0) {
+                document.getElementById('countdown-2').innerHTML = formatCountdown(distance2);
+            } else {
+                document.getElementById('countdown-2').innerHTML = "Competition Ended";
+            }
+            
+            if (distance3 > 0) {
+                document.getElementById('countdown-3').innerHTML = formatCountdown(distance3);
+            } else {
+                document.getElementById('countdown-3').innerHTML = "Competition Started";
+            }
+        }
+        
+        function formatCountdown(distance) {
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+        
+        // Update countdowns every second
+        setInterval(updateCountdowns, 1000);
+        updateCountdowns(); // Initial call
+        
+        // Modal functions
+        function openModal(competitionType) {
+            document.getElementById('submission-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+        
+        function closeModal() {
+            document.getElementById('submission-modal').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+        
+        // Form submission
+        document.getElementById('submission-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Your entry has been submitted successfully! Good luck!');
+            closeModal();
+            this.reset();
+        });
+        
+        // Close modal if clicked outside content
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('submission-modal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

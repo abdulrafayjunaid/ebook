@@ -1,0 +1,253 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+nav{
+    height: 40px;
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10;
+}
+.logo {
+    font-size: 50px;
+    margin: 20px;
+}
+.logo1 {
+    font-size: 50px;
+    margin: 40px 0;
+    text-align: center;
+
+}
+nav a{
+    font-size: 20px;
+    text-decoration: none;
+    padding: 0 10px;
+    color: #333;
+    transition: color 0.3s;
+}
+nav a:hover {
+    color: #4a90e2;
+}
+
+/* Events Section */
+.events-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.page-subtitle {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 40px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.event-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.event-image {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.event-content {
+    padding: 20px;
+}
+
+.event-date {
+    color: #4a90e2;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.event-title {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.event-description {
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.event-meta {
+    display: flex;
+    justify-content: space-between;
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.event-button {
+    display: inline-block;
+    background: #4a90e2;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.event-button:hover {
+    background: #3a7bc8;
+}
+
+.newsletter {
+    background: #f8f9fa;
+    padding: 60px 20px;
+    text-align: center;
+    margin: 60px 0;
+}
+
+.newsletter h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.newsletter p {
+    max-width: 600px;
+    margin: 0 auto 30px;
+    color: #666;
+}
+
+.newsletter-form {
+    display: flex;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.newsletter-input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px 0 0 5px;
+    font-size: 16px;
+}
+
+.newsletter-button {
+    background: #4a90e2;
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.newsletter-button:hover {
+    background: #3a7bc8;
+}
+
+.footer {
+    background: #222;  
+    margin-top: 40px;        
+    color: #fff;               
+    text-align: center;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+}
+
+.footer .logo {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.footer p {
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #ccc;
+}
+
+.footer-icons a {
+    margin: 0 10px;
+    font-size: 22px;
+    color: #fff;
+    transition: color 0.3s;
+}
+
+.footer-icons a:hover {
+    color: #3498db; /* blue hover */
+}
+
+.footer-bottom {
+    border-top: 1px solid #444;
+    margin-top: 20px;
+    padding-top: 15px;
+    font-size: 13px;
+    color: #aaa;
+}
+
+@media (max-width: 768px) {
+    .events-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    nav {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 10px;
+    }
+    
+    nav a {
+        margin: 5px;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+    }
+    
+    .newsletter-input {
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+    
+    .newsletter-button {
+        border-radius: 5px;
+        padding: 12px;
+    }
+}

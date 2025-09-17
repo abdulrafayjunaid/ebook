@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ebook Cart</title>
+    <link rel="stylesheet" href="css/cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">Ebook</div>
+        <div class="links">
+            <a href="events.html">Events</a>
+            <a href="#">Contact us</a>
+            <a href="index.html">Home</a>
+            <a href="about.html">About us</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+            <a href="user/dashboard.html">Dashboard</a>
+            <a href="">Categories</a>
+            <a href="competition.html">Competition</a>
+            <a href="cart.html">cart</a>
+        </div>
+    </nav>
+    
+    <main>
+        <div class="cart-items">
+            <div class="cart-header">
+                <h2>Your Cart (4 items)</h2>
+                <a href="#" style="color: #3498db;">Continue Shopping</a>
+            </div>
+            
+            <div class="cart-item">
+                <div class="item-image">
+                    <img src="ss.jpeg" alt="Ebook cover">
+                </div>
+                <div class="item-details">
+                    <h3 class="item-title">JavaScript: The Definitive Guide</h3>
+                    <p class="item-description">Master the language of the web with this comprehensive JavaScript guide. Perfect for beginners and advanced developers alike.</p>
+                    <div class="item-price">$24.99</div>
+                    <div class="item-actions">
+                        <div class="quantity-selector">
+                            <button>-</button>
+                            <input type="text" value="1">
+                            <button>+</button>
+                        </div>
+                        <button class="remove-btn">Remove</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cart-item">
+                <div class="item-image">
+                    <img src="ss.jpeg" alt="Ebook cover">
+                </div>
+                <div class="item-details">
+                    <h3 class="item-title">Python for Data Analysis</h3>
+                    <p class="item-description">Learn how to use Python for data analysis with this practical guide. Includes real-world examples and exercises.</p>
+                    <div class="item-price">$29.99</div>
+                    <div class="item-actions">
+                        <div class="quantity-selector">
+                            <button>-</button>
+                            <input type="text" value="1">
+                            <button>+</button>
+                        </div>
+                        <button class="remove-btn">Remove</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cart-item">
+                <div class="item-image">
+                    <img src="ss.jpeg" alt="Ebook cover">
+                </div>
+                <div class="item-details">
+                    <h3 class="item-title">React.js Essentials</h3>
+                    <p class="item-description">Build modern web applications with React. This book covers everything from components to advanced state management.</p>
+                    <div class="item-price">$19.99</div>
+                    <div class="item-actions">
+                        <div class="quantity-selector">
+                            <button>-</button>
+                            <input type="text" value="1">
+                            <button>+</button>
+                        </div>
+                        <button class="remove-btn">Remove</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cart-item">
+                <div class="item-image">
+                    <img src="ss.jpeg" alt="Ebook cover">
+                </div>
+                <div class="item-details">
+                    <h3 class="item-title">CSS Mastery</h3>
+                    <p class="item-description">Take your CSS skills to the next level with advanced techniques, layouts, and responsive design principles.</p>
+                    <div class="item-price">$22.99</div>
+                    <div class="item-actions">
+                        <div class="quantity-selector">
+                            <button>-</button>
+                            <input type="text" value="1">
+                            <button>+</button>
+                        </div>
+                        <button class="remove-btn">Remove</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sidebar">
+            <div class="cart-summary">
+                <h3>Order Summary</h3>
+                <div class="summary-item">
+                    <span>Subtotal</span>
+                    <span>$97.96</span>
+                </div>
+                <div class="summary-item">
+                    <span>Discount</span>
+                    <span>-$10.00</span>
+                </div>
+                <div class="summary-item">
+                    <span>Tax</span>
+                    <span>$8.82</span>
+                </div>
+                <div class="summary-total">
+                    <span>Total</span>
+                    <span>$96.78</span>
+                </div>
+                <button class="checkout-btn">Proceed to Checkout</button>
+                <a href="#" class="continue-shopping">Continue Shopping</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+          <h2 class="logo">Ebook World</h2>
+          <p>Dive into the world of ebooks with us. Read, learn, and explore.</p>
+          <div class="footer-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-discord"></i></a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Ebook World | All Rights Reserved</p>
+        </div>
+      </footer>
+      
+      <script>
+        // Basic functionality for quantity buttons
+        document.querySelectorAll('.quantity-selector button').forEach(button => {
+            button.addEventListener('click', function() {
+                const input = this.parentElement.querySelector('input');
+                let value = parseInt(input.value);
+                
+                if (this.textContent === '+') {
+                    value++;
+                } else if (this.textContent === '-' && value > 1) {
+                    value--;
+                }
+                
+                input.value = value;
+            });
+        });
+        
+        // Remove item functionality
+        document.querySelectorAll('.remove-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                this.closest('.cart-item').style.display = 'none';
+                alert('Item removed from cart');
+            });
+        });
+      </script>
+</body>
+</html>

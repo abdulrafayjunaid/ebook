@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details - Ebook World</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/book-details.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">Ebook</div>
+        <div class="links">
+            <a href="events.html">Events</a>
+            <a href="#">Contact us</a>
+            <a href="index.html">Home</a>
+            <a href="about.html">About us</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+            <a href="user/dashboard.html">Dashboard</a>
+            <a href="">Categories</a>
+            <a href="competition.html">Competition</a>
+            <a href="cart.html">cart</a>
+        </div>
+    </nav>
+    
+    <main>
+        <div class="book-detail">
+            <div class="book-cover">
+                <img src="https://via.placeholder.com/400x600/3498db/ffffff?text=Book+Cover" alt="Book Cover">
+            </div>
+            
+            <div class="book-info">
+                <h1 class="book-title">The Digital Frontier</h1>
+                <p class="book-author">by Alex Johnson</p>
+                
+                <div class="book-description">
+                    <p>Embark on an extraordinary journey through the digital landscape in this captivating novel that explores the intersection of technology and humanity. Follow the protagonist as they navigate complex virtual worlds and uncover secrets that could change the course of history.</p>
+                    
+                    <p>This thought-provoking story combines cutting-edge concepts with deeply human emotions, creating a narrative that will stay with you long after you've finished reading. Perfect for fans of cyberpunk and speculative fiction.</p>
+                </div>
+                
+                <div class="pricing-section">
+                    <div class="price">$12.99</div>
+                    
+                    <div class="formats">
+                        <h3>Available Formats</h3>
+                        <div class="format-options">
+                            <button class="format-btn selected">PDF</button>
+                            <button class="format-btn">ePUB</button>
+                            <button class="format-btn">Mobi</button>
+                            <button class="format-btn">Audiobook</button>
+                        </div>
+                    </div>
+                    
+                    <div class="subscription">
+                        <h3>Subscription Options</h3>
+                        <div class="subscription-options">
+                            <div class="sub-option selected">
+                                <h4>One-time Purchase</h4>
+                                <p>Keep forever</p>
+                            </div>
+                            <div class="sub-option">
+                                <h4>Monthly Access</h4>
+                                <p>$4.99/month</p>
+                            </div>
+                            <div class="sub-option">
+                                <h4>Annual Access</h4>
+                                <p>$49.99/year</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-primary">Add to Cart</button>
+                    <button class="btn btn-secondary">Add to Wishlist</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+          <h2 class="logo">Ebook World</h2>
+          <p>Dive into the world of ebooks with us. Read, learn, and explore.</p>
+          <div class="footer-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-discord"></i></a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Ebook World | All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        // Format selection
+        const formatButtons = document.querySelectorAll('.format-btn');
+        formatButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                formatButtons.forEach(btn => btn.classList.remove('selected'));
+                button.classList.add('selected');
+            });
+        });
+        
+        // Subscription option selection
+        const subOptions = document.querySelectorAll('.sub-option');
+        subOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                subOptions.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+            });
+        });
+    </script>
+</body>
+</html>
