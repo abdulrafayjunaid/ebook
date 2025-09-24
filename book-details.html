@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details - Ebook World</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #6C63FF;
+            --secondary: #FF6584;
+            --accent: #36D1DC;
+            --dark: #2A2A3C;
+            --light: #F8F9FC;
+            --success: #42B883;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--light);
+        }
+
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 0 15px;
+            transition: all 0.3s ease;
+            padding: 8px 5px;
+        }
+
+        .links a:hover {
+            color: var(--light);
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Main Content */
+        main {
+            padding: 40px 0;
+        }
+
+        .book-detail {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            max-width: 1200px;
+            width: 90%;
+        }
+
+        .book-cover {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+        }
+
+        .book-cover img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .book-info {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .book-title {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .book-author {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .book-description {
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .book-description p {
+            margin-bottom: 15px;
+        }
+
+        .pricing-section {
+            margin-bottom: 30px;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 25px;
+        }
+
+        .formats, .subscription {
+            margin-bottom: 25px;
+        }
+
+        .formats h3, .subscription h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        .formats h3:after, .subscription h3:after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            margin-top: 5px;
+            border-radius: 2px;
+        }
+
+        .format-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .format-btn {
+            padding: 10px 20px;
+            background: var(--light);
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .format-btn:hover {
+            border-color: var(--primary);
+        }
+
+        .format-btn.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .subscription-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .sub-option {
+            flex: 1;
+            min-width: 150px;
+            padding: 20px;
+            background: var(--light);
+            border: 2px solid #ddd;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sub-option:hover {
+            border-color: var(--primary);
+        }
+
+        .sub-option.selected {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.1), rgba(54, 209, 220, 0.1));
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.1);
+        }
+
+        .sub-option h4 {
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .sub-option p {
+            color: var(--secondary);
+            font-weight: 500;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 101, 132, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 101, 132, 0.6);
+        }
+
+        .btn-secondary {
+            background: var(--light);
+            color: var(--dark);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .footer-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-content p {
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .footer-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-icons a {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-icons a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .nav-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .links {
+                margin-top: 20px;
+            }
+
+            .links a {
+                margin: 5px 10px;
+            }
+
+            .book-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .book-detail {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .book-cover {
+                max-width: 300px;
+            }
+            
+            .formats h3:after, .subscription h3:after {
+                margin: 5px auto 0;
+            }
+            
+            .format-options, .subscription-options {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .book-title {
+                font-size: 1.8rem;
+            }
+            
+            .links a {
+                font-size: 0.9rem;
+                margin: 3px 5px;
+            }
+            
+            .book-detail {
+                padding: 20px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-book-open"></i>
+                <span>Ebook World</span>
+            </div>
+            <div class="links">
+                <a href="events.html">Events</a>
+                <a href="contact.html">Contact us</a>
+                <a href="index.html">Home</a>
+                <a href="about.html">About us</a>
+                <a href="login.html">Login</a>
+                <a href="user/dashboard.html">Dashboard</a>
+                <a href="categroies.html">Categories</a>
+                <a href="competition.html">Competition</a>
+                <a href="cart.html">Cart</a>
+            </div>
+        </div>
+    </nav>
+    
+    <main>
+        <div class="book-detail">
+            <div class="book-cover">
+                <img src="https://via.placeholder.com/400x600/3498db/ffffff?text=Book+Cover" alt="Book Cover">
+            </div>
+            
+            <div class="book-info">
+                <h1 class="book-title">The Digital Frontier</h1>
+                <p class="book-author">by Alex Johnson</p>
+                
+                <div class="book-description">
+                    <p>Embark on an extraordinary journey through the digital landscape in this captivating novel that explores the intersection of technology and humanity. Follow the protagonist as they navigate complex virtual worlds and uncover secrets that could change the course of history.</p>
+                    
+                    <p>This thought-provoking story combines cutting-edge concepts with deeply human emotions, creating a narrative that will stay with you long after you've finished reading. Perfect for fans of cyberpunk and speculative fiction.</p>
+                </div>
+                
+                <div class="pricing-section">
+                    <div class="price">$12.99</div>
+                    
+                    <div class="formats">
+                        <h3>Available Formats</h3>
+                        <div class="format-options">
+                            <button class="format-btn selected">PDF</button>
+                            <button class="format-btn">ePUB</button>
+                            <button class="format-btn">Mobi</button>
+                            <button class="format-btn">Audiobook</button>
+                        </div>
+                    </div>
+                    
+                    <div class="subscription">
+                        <h3>Subscription Options</h3>
+                        <div class="subscription-options">
+                            <div class="sub-option selected">
+                                <h4>One-time Purchase</h4>
+                                <p>Keep forever</p>
+                            </div>
+                            <div class="sub-option">
+                                <h4>Monthly Access</h4>
+                                <p>$4.99/month</p>
+                            </div>
+                            <div class="sub-option">
+                                <h4>Annual Access</h4>
+                                <p>$49.99/year</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-primary">Add to Cart</button>
+                    <button class="btn btn-secondary">Add to Wishlist</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <h2 class="logo">Ebook World</h2>
+                <p>Dive into the world of ebooks with us. Read, learn, and explore.</p>
+                <div class="footer-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ebook World | All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Format selection
+        const formatButtons = document.querySelectorAll('.format-btn');
+        formatButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                formatButtons.forEach(btn => btn.classList.remove('selected'));
+                button.classList.add('selected');
+            });
+        });
+        
+        // Subscription option selection
+        const subOptions = document.querySelectorAll('.sub-option');
+        subOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                subOptions.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+            });
+        });
+    </script>
+</body>
+</html>

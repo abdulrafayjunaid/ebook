@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competition Results - Ebook Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #6C63FF;
+            --secondary: #FF6584;
+            --accent: #36D1DC;
+            --dark: #2A2A3C;
+            --light: #F8F9FC;
+            --success: #42B883;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--light);
+        }
+
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 0 15px;
+            transition: all 0.3s ease;
+            padding: 8px 5px;
+        }
+
+        .links a:hover {
+            color: var(--light);
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Results Container */
+        .results-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px 20px;
+            background: linear-gradient(rgba(108, 99, 255, 0.8), rgba(54, 209, 220, 0.8)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="white" opacity="0.2" width="10" height="10"/></svg>');
+            color: white;
+            border-radius: 20px;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin: 40px 0 30px;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        /* Results Sections */
+        .results-section {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        /* Winners Grid */
+        .winners-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .winner-card {
+            flex: 1;
+            min-width: 280px;
+            max-width: 350px;
+            background: var(--light);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .winner-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .winner-rank {
+            padding: 15px;
+            text-align: center;
+            font-weight: 700;
+            color: white;
+        }
+
+        .rank-1 {
+            background: linear-gradient(to right, #FFD700, #FFA500);
+        }
+
+        .rank-2 {
+            background: linear-gradient(to right, #C0C0C0, #A9A9A9);
+        }
+
+        .rank-3 {
+            background: linear-gradient(to right, #CD7F32, #8C6B46);
+        }
+
+        .winner-info {
+            padding: 20px;
+        }
+
+        .winner-name {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .winner-title {
+            font-style: italic;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+
+        .winner-prize {
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .winner-bio {
+            color: #666;
+        }
+
+        /* Prize Details */
+        .prize-details {
+            margin: 20px 0;
+        }
+
+        .prize-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .prize-table th, .prize-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .prize-table th {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: white;
+            font-weight: 600;
+        }
+
+        .prize-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .prize-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            flex: 1;
+            min-width: 180px;
+            max-width: 220px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 25px 15px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+        }
+
+        /* Judges Comments */
+        .judges-section {
+            margin: 25px 0;
+        }
+
+        .judge-comment {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .judge-name {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .footer-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-content p {
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .footer-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-icons a {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-icons a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .nav-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .links {
+                margin-top: 20px;
+            }
+
+            .links a {
+                margin: 5px 10px;
+            }
+
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .winners-grid, .stats-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .winner-card, .stat-card {
+                width: 100%;
+                max-width: 500px;
+            }
+            
+            .prize-table {
+                font-size: 0.9rem;
+            }
+            
+            ul {
+                columns: 1 !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .links a {
+                font-size: 0.9rem;
+                margin: 3px 5px;
+            }
+            
+            .results-section {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-book-open"></i>
+                <span>Ebook World</span>
+            </div>
+            <div class="links">
+                <a href="events.html">Events</a>
+                <a href="contact.html">Contact us</a>
+                <a href="index.html">Home</a>
+                <a href="about.html">About us</a>
+                <a href="login.html">Login</a>
+                <a href="user/dashboard.html">Dashboard</a>
+                <a href="categroies.html">Categories</a>
+                <a href="competition.html">Competition</a>
+                <a href="cart.html">Cart</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="results-container">
+        <div class="page-header">
+            <h1>2025 Writing Competition Results</h1>
+            <p>Celebrating the most talented writers from around the world</p>
+        </div>
+        
+        <div class="results-section">
+            <h2 class="section-title">Winners</h2>
+            
+            <div class="winners-grid">
+                <!-- First Place -->
+                <div class="winner-card">
+                    <div class="winner-rank rank-1">
+                        <i class="fas fa-trophy"></i> 1st Place
+                    </div>
+                    <div class="winner-info">
+                        <h3 class="winner-name">Sarah Johnson</h3>
+                        <p class="winner-title">"The Last Library"</p>
+                        <div class="winner-prize">$2,000 Prize</div>
+                        <p class="winner-bio">Sarah is a librarian from Portland, Oregon who writes fiction in her spare time. This is her first writing competition win.</p>
+                    </div>
+                </div>
+                
+                <!-- Second Place -->
+                <div class="winner-card">
+                    <div class="winner-rank rank-2">
+                        <i class="fas fa-medal"></i> 2nd Place
+                    </div>
+                    <div class="winner-info">
+                        <h3 class="winner-name">Michael Chen</h3>
+                        <p class="winner-title">"Digital Ghosts"</p>
+                        <div class="winner-prize">$1,000 Prize</div>
+                        <p class="winner-bio">Michael is a software engineer from Toronto with a passion for speculative fiction and cyberpunk themes.</p>
+                    </div>
+                </div>
+                
+                <!-- Third Place -->
+                <div class="winner-card">
+                    <div class="winner-rank rank-3">
+                        <i class="fas fa-medal"></i> 3rd Place
+                    </div>
+                    <div class="winner-info">
+                        <h3 class="winner-name">Emma Rodriguez</h3>
+                        <p class="winner-title">"Beneath the Azure Sky"</p>
+                        <div class="winner-prize">$500 Prize</div>
+                        <p class="winner-bio">Emma is a college student from Barcelona studying literature. She enjoys writing magical realism and poetry.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="results-section">
+            <h2 class="section-title">Prize Details</h2>
+            
+            <div class="prize-details">
+                <p>Our 2025 writing competition offered over $5,000 in total prizes, including cash awards, publishing opportunities, and professional writing software packages.</p>
+                
+                <table class="prize-table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Cash Prize</th>
+                            <th>Additional Prizes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1st Place</td>
+                            <td>$2,000</td>
+                            <td>Publication in Ebook World Magazine, 1-year subscription to Writing Mastery</td>
+                        </tr>
+                        <tr>
+                            <td>2nd Place</td>
+                            <td>$1,000</td>
+                            <td>Featured on our blog, 6-month subscription to Writing Mastery</td>
+                        </tr>
+                        <tr>
+                            <td>3rd Place</td>
+                            <td>$500</td>
+                            <td>Featured on our blog, 3-month subscription to Writing Mastery</td>
+                        </tr>
+                        <tr>
+                            <td>4th-10th Place</td>
+                            <td>$100</td>
+                            <td>Digital certificate of achievement</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <p>All winners and honorable mentions will have their work featured in our annual competition anthology, which will be available for purchase on our platform.</p>
+            </div>
+        </div>
+        
+        <div class="results-section">
+            <h2 class="section-title">Competition Statistics</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">1,247</div>
+                    <div class="stat-label">Total Submissions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">43</div>
+                    <div class="stat-label">Countries Represented</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">18-72</div>
+                    <div class="stat-label">Age Range of Participants</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">14</div>
+                    <div class="stat-label">Days of Deliberation</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="results-section">
+            <h2 class="section-title">Judges' Comments</h2>
+            
+            <div class="judges-section">
+                <div class="judge-comment">
+                    <div class="judge-name">Dr. Elizabeth Moore - Head Judge</div>
+                    <p>"The quality of submissions this year was exceptional. We were particularly impressed with the creativity shown in interpreting the theme 'New Beginnings.' The winning entry stood out for its emotional depth and exquisite prose."</p>
+                </div>
+                
+                <div class="judge-comment">
+                    <div class="judge-name">Professor James Wilson</div>
+                    <p>"Selecting winners from such a talented pool of writers was incredibly challenging. Many submissions demonstrated remarkable skill in character development and narrative structure."</p>
+                </div>
+                
+                <div class="judge-comment">
+                    <div class="judge-name">Bestselling Author Maria Gonzalez</div>
+                    <p>"I was delighted to see so many fresh voices and unique perspectives. The future of writing is in good hands with these emerging talents."</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="results-section">
+            <h2 class="section-title">Honorable Mentions</h2>
+            
+            <div class="prize-details">
+                <p>The following participants delivered exceptional work and deserve recognition for their outstanding submissions:</p>
+                <ul style="margin: 20px; columns: 2; list-style-type: none;">
+                    <li><i class="fas fa-pen-fancy" style="color: var(--primary); margin-right: 10px;"></i> Alexandra Petrov - "Winter's Tale"</li>
+                    <li><i class="fas fa-pen-fancy" style="color: var(--primary); margin-right: 10px;"></i> Benjamin Okonjo - "Sands of Time"</li>
+                    <li><i class="fas fa-pen-fancy" style="color: var(--primary); margin-right: 10px;"></i> Chloe Mitchell - "The Glassblower's Daughter"</li>
+                    <li><i class="fas fa-pen-fancy" style="color: var(--primary); margin-right: 10px;"></i> David Kim - "Neon Dreams"</li>
+                    <li><i class="fas fa-pen-fancy" style="color: var(--primary); margin-right: 10px;"></i> Fatima Nadeem - "Silent Conversations"</li>
+                    <li><i class="fas fa-pen-fancy" style="color: var(--primary); margin-right: 10px;"></i> Gregory Schmidt - "The Architect of Memory"</li>
+                </ul>
+                <p>These writers will receive a digital certificate of excellence and a complimentary 3-month subscription to our platform.</p>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <h2 class="logo">Ebook World</h2>
+                <p>Dive into the world of ebooks with us. Read, learn, and explore.</p>
+                <div class="footer-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ebook World | All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

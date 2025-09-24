@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Competitions - Ebook Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #6C63FF;
+            --secondary: #FF6584;
+            --accent: #36D1DC;
+            --dark: #2A2A3C;
+            --light: #F8F9FC;
+            --success: #42B883;
+            --warning: #FF9F43;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--light);
+        }
+
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 0 15px;
+            transition: all 0.3s ease;
+            padding: 8px 5px;
+        }
+
+        .links a:hover {
+            color: var(--light);
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 80px 0;
+            background: linear-gradient(rgba(108, 99, 255, 0.8), rgba(54, 209, 220, 0.8)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="white" opacity="0.2" width="10" height="10"/></svg>');
+            color: white;
+            border-radius: 0 0 40px 40px;
+            margin-bottom: 40px;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        /* Competition Grid */
+        .competition-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .competition-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .competition-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            padding: 25px 25px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .card-header h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+
+        .status-badge {
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .status-badge.active {
+            background: rgba(66, 184, 131, 0.2);
+            color: var(--success);
+        }
+
+        .status-badge.coming-soon {
+            background: rgba(255, 159, 67, 0.2);
+            color: var(--warning);
+        }
+
+        .card-body {
+            padding: 0 25px;
+        }
+
+        .topic, .rules, .timer {
+            margin-bottom: 20px;
+        }
+
+        .topic h4, .rules h4, .timer h4 {
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .topic h4 i, .rules h4 i, .timer h4 i {
+            margin-right: 8px;
+        }
+
+        .topic p {
+            color: #666;
+            font-style: italic;
+        }
+
+        .rules ul {
+            padding-left: 20px;
+            color: #666;
+        }
+
+        .rules li {
+            margin-bottom: 5px;
+        }
+
+        .countdown {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            background: var(--light);
+            padding: 10px 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .card-footer {
+            padding: 20px 25px;
+            background: var(--light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .prize {
+            font-weight: 700;
+            color: var(--success);
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(108, 99, 255, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #5a52e0;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(108, 99, 255, 0.6);
+        }
+
+        .btn-secondary {
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        .btn-secondary:hover {
+            background: #e8eaf1;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--secondary);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .modal-header h2 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .footer-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-content p {
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .footer-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-icons a {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-icons a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .nav-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .links {
+                margin-top: 20px;
+            }
+
+            .links a {
+                margin: 5px 10px;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .competition-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-footer {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .prize {
+                order: 2;
+            }
+
+            .btn {
+                order: 1;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+            }
+
+            .links a {
+                font-size: 0.9rem;
+                margin: 3px 5px;
+            }
+
+            .card-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .modal-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-book-open"></i>
+                <span>Ebook World</span>
+            </div>
+            <div class="links">
+                <a href="events.html">Events</a>
+                <a href="contact.html">Contact us</a>
+                <a href="index.html">Home</a>
+                <a href="about.html">About us</a>
+                <a href="login.html">Login</a>
+                <!-- <a href="register.html">Register</a> -->
+                <a href="user/dashboard.html">Dashboard</a>
+                <a href="categories.html">Categories</a>
+                <a href="competition.html">Competition</a>
+                <a href="cart.html">Cart</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="page-header">
+        <div class="container">
+            <h1>Writing Competitions</h1>
+            <p>Showcase your writing skills, compete with other talented authors, and win amazing prizes!</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="competition-grid">
+            <!-- Competition 1 -->
+            <div class="competition-card">
+                <div class="card-header">
+                    <h3>Short Story Challenge</h3>
+                    <div class="status-badge active">Active</div>
+                </div>
+                <div class="card-body">
+                    <div class="topic">
+                        <h4><i class="fas fa-pencil-alt"></i> Topic</h4>
+                        <p>"An unexpected discovery in an old library"</p>
+                    </div>
+                    <div class="rules">
+                        <h4><i class="fas fa-list-ol"></i> Rules</h4>
+                        <ul>
+                            <li>Word count: 1,500 - 3,000 words</li>
+                            <li>Original, unpublished work only</li>
+                            <li>No plagiarism</li>
+                            <li>Submit in PDF or DOCX format</li>
+                        </ul>
+                    </div>
+                    <div class="timer">
+                        <h4><i class="fas fa-clock"></i> Time Remaining</h4>
+                        <div class="countdown" id="countdown-1">5d 12h 30m 15s</div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="prize"><i class="fas fa-trophy"></i> Prize: $500</div>
+                    <button class="btn btn-primary" onclick="openModal('short-story')">Submit Entry</button>
+                </div>
+            </div>
+            
+            <!-- Competition 2 -->
+            <div class="competition-card">
+                <div class="card-header">
+                    <h3>Poetry Contest</h3>
+                    <div class="status-badge active">Active</div>
+                </div>
+                <div class="card-body">
+                    <div class="topic">
+                        <h4><i class="fas fa-pencil-alt"></i> Topic</h4>
+                        <p>"The sound of silence"</p>
+                    </div>
+                    <div class="rules">
+                        <h4><i class="fas fa-list-ol"></i> Rules</h4>
+                        <ul>
+                            <li>Maximum 40 lines</li>
+                            <li>Any poetry form accepted</li>
+                            <li>Original work only</li>
+                            <li>Submit in PDF or DOCX format</li>
+                        </ul>
+                    </div>
+                    <div class="timer">
+                        <h4><i class="fas fa-clock"></i> Time Remaining</h4>
+                        <div class="countdown" id="countdown-2">3d 06h 45m 22s</div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="prize"><i class="fas fa-trophy"></i> Prize: $300</div>
+                    <button class="btn btn-primary" onclick="openModal('poetry')">Submit Entry</button>
+                </div>
+            </div>
+            
+            <!-- Competition 3 -->
+            <div class="competition-card">
+                <div class="card-header">
+                    <h3>Essay Competition</h3>
+                    <div class="status-badge coming-soon">Coming Soon</div>
+                </div>
+                <div class="card-body">
+                    <div class="topic">
+                        <h4><i class="fas fa-pencil-alt"></i> Topic</h4>
+                        <p>"The future of digital reading"</p>
+                    </div>
+                    <div class="rules">
+                        <h4><i class="fas fa-list-ol"></i> Rules</h4>
+                        <ul>
+                            <li>Word count: 2,000 - 4,000 words</li>
+                            <li>Well-researched and cited</li>
+                            <li>Original work only</li>
+                            <li>Submit in PDF or DOCX format</li>
+                        </ul>
+                    </div>
+                    <div class="timer">
+                        <h4><i class="fas fa-clock"></i> Starts In</h4>
+                        <div class="countdown" id="countdown-3">12d 18h 05m 40s</div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="prize"><i class="fas fa-trophy"></i> Prize: $750</div>
+                    <button class="btn btn-secondary" disabled>Notify Me</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Submission Modal -->
+    <div class="modal" id="submission-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="modal-header">
+                <h2>Submit Your Entry</h2>
+                <p>Please fill out the form below to enter the competition</p>
+            </div>
+            <form id="submission-form">
+                <div class="form-group">
+                    <label for="author-name">Full Name</label>
+                    <input type="text" id="author-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="author-email">Email Address</label>
+                    <input type="email" id="author-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="entry-title">Entry Title</label>
+                    <input type="text" id="entry-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="entry-file">Upload Your Entry (PDF or DOCX)</label>
+                    <input type="file" id="entry-file" accept=".pdf,.docx" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Entry</button>
+            </form>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <h2 class="logo">Ebook World</h2>
+                <p>Dive into the world of ebooks with us. Read, learn, and explore.</p>
+                <div class="footer-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ebook World | All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Countdown timers
+        function updateCountdowns() {
+            // Set competition end dates (for demo, using fixed dates)
+            const endDate1 = new Date('2025-02-15T23:59:59').getTime();
+            const endDate2 = new Date('2025-02-12T23:59:59').getTime();
+            const startDate3 = new Date('2025-02-25T00:00:00').getTime();
+            
+            const now = new Date().getTime();
+            
+            // Calculate time differences
+            const distance1 = endDate1 - now;
+            const distance2 = endDate2 - now;
+            const distance3 = startDate3 - now;
+            
+            // Update countdown displays
+            if (distance1 > 0) {
+                document.getElementById('countdown-1').innerHTML = formatCountdown(distance1);
+            } else {
+                document.getElementById('countdown-1').innerHTML = "Competition Ended";
+            }
+            
+            if (distance2 > 0) {
+                document.getElementById('countdown-2').innerHTML = formatCountdown(distance2);
+            } else {
+                document.getElementById('countdown-2').innerHTML = "Competition Ended";
+            }
+            
+            if (distance3 > 0) {
+                document.getElementById('countdown-3').innerHTML = formatCountdown(distance3);
+            } else {
+                document.getElementById('countdown-3').innerHTML = "Competition Started";
+            }
+        }
+        
+        function formatCountdown(distance) {
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+        
+        // Update countdowns every second
+        setInterval(updateCountdowns, 1000);
+        updateCountdowns(); // Initial call
+        
+        // Modal functions
+        function openModal(competitionType) {
+            document.getElementById('submission-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+        
+        function closeModal() {
+            document.getElementById('submission-modal').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+        
+        // Form submission
+        document.getElementById('submission-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Your entry has been submitted successfully! Good luck!');
+            closeModal();
+            this.reset();
+        });
+        
+        // Close modal if clicked outside content
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('submission-modal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

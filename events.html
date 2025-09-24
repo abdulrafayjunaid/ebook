@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - Ebook World</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #6C63FF;
+            --secondary: #FF6584;
+            --accent: #36D1DC;
+            --dark: #2A2A3C;
+            --light: #F8F9FC;
+            --success: #42B883;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--light);
+        }
+
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            margin: 0 15px;
+            transition: all 0.3s ease;
+            padding: 8px 5px;
+        }
+
+        .links a:hover {
+            color: var(--light);
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Hero Section */
+        .events-hero {
+            text-align: center;
+            padding: 80px 0;
+            background: linear-gradient(rgba(108, 99, 255, 0.8), rgba(54, 209, 220, 0.8)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="white" opacity="0.2" width="10" height="10"/></svg>');
+            color: white;
+            border-radius: 0 0 40px 40px;
+            margin-bottom: 40px;
+        }
+
+        .page-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        /* Events Grid */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .event-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .event-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .event-content {
+            padding: 25px;
+        }
+
+        .event-date {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .event-date i {
+            margin-right: 8px;
+        }
+
+        .event-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .event-description {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .event-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            color: #777;
+        }
+
+        .event-meta span {
+            display: flex;
+            align-items: center;
+        }
+
+        .event-meta i {
+            margin-right: 5px;
+        }
+
+        .event-button {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 101, 132, 0.4);
+            text-align: center;
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .event-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 101, 132, 0.6);
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: white;
+            padding: 60px 0;
+            border-radius: 40px;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .newsletter p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-size: 1rem;
+        }
+
+        .newsletter-button {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 0 30px 30px 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-button:hover {
+            background: #ff4d72;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .footer-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-content p {
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .footer-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-icons a {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-icons a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .nav-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .links {
+                margin-top: 20px;
+            }
+
+            .links a {
+                margin: 5px 10px;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .newsletter-input, .newsletter-button {
+                border-radius: 30px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .page-subtitle {
+                font-size: 1rem;
+            }
+
+            .links a {
+                font-size: 0.9rem;
+                margin: 3px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-book-open"></i>
+                <span>Ebook World</span>
+            </div>
+            <div class="links">
+                <a href="events.html">Events</a>
+                <a href="contact.html">Contact us</a>
+                <a href="index.html">Home</a>
+                <a href="about.html">About us</a>
+                <a href="login.html">Login</a>
+                <a href="user/dashboard.html">Dashboard</a>
+                <a href="categories.html">Categories</a>
+                <a href="competition.html">Competition</a>
+                <a href="cart.html">Cart</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="events-hero">
+        <div class="container">
+            <h1 class="page-title">Upcoming Events</h1>
+            <p class="page-subtitle">Join our community events to connect with authors, participate in discussions, and expand your reading horizons.</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="events-grid">
+            <!-- Event 1 -->
+            <div class="event-card">
+                <img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Author Meetup" class="event-image">
+                <div class="event-content">
+                    <div class="event-date"><i class="fas fa-calendar-alt"></i> June 15, 2025 | 6:00 PM EST</div>
+                    <h3 class="event-title">Author Meet & Greet</h3>
+                    <p class="event-description">Join bestselling author Jane Doe for an intimate discussion of her latest novel and Q&A session.</p>
+                    <div class="event-meta">
+                        <span><i class="fas fa-users"></i> 45 spots left</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Virtual Event</span>
+                    </div>
+                    <a href="#" class="event-button">Register Now</a>
+                </div>
+            </div>
+            
+            <!-- Event 2 -->
+            <div class="event-card">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Book Club" class="event-image">
+                <div class="event-content">
+                    <div class="event-date"><i class="fas fa-calendar-alt"></i> June 22, 2025 | 7:30 PM EST</div>
+                    <h3 class="event-title">Monthly Book Club</h3>
+                    <p class="event-description">This month we're discussing "The Midnight Library" by Matt Haig. All readers welcome!</p>
+                    <div class="event-meta">
+                        <span><i class="fas fa-users"></i> 32 spots left</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Virtual Event</span>
+                    </div>
+                    <a href="#" class="event-button">Join Discussion</a>
+                </div>
+            </div>
+            
+            <!-- Event 3 -->
+            <div class="event-card">
+                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Writing Workshop" class="event-image">
+                <div class="event-content">
+                    <div class="event-date"><i class="fas fa-calendar-alt"></i> July 5-6, 2025 | 10:00 AM EST</div>
+                    <h3 class="event-title">Creative Writing Workshop</h3>
+                    <p class="event-description">A two-day intensive workshop focused on developing characters and building compelling narratives.</p>
+                    <div class="event-meta">
+                        <span><i class="fas fa-users"></i> 18 spots left</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Virtual Event</span>
+                    </div>
+                    <a href="#" class="event-button">Reserve Spot</a>
+                </div>
+            </div>
+            
+            <!-- Event 4 -->
+            <div class="event-card">
+                <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Poetry Night" class="event-image">
+                <div class="event-content">
+                    <div class="event-date"><i class="fas fa-calendar-alt"></i> July 12, 2025 | 8:00 PM EST</div>
+                    <h3 class="event-title">Poetry Reading Night</h3>
+                    <p class="event-description">An evening of poetry featuring established and emerging poets. Open mic session included.</p>
+                    <div class="event-meta">
+                        <span><i class="fas fa-users"></i> 56 spots left</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Virtual Event</span>
+                    </div>
+                    <a href="#" class="event-button">Join Event</a>
+                </div>
+            </div>
+            
+            <!-- Event 5 -->
+            <div class="event-card">
+                <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Publishing Seminar" class="event-image">
+                <div class="event-content">
+                    <div class="event-date"><i class="fas fa-calendar-alt"></i> July 20, 2025 | 2:00 PM EST</div>
+                    <h3 class="event-title">Publishing 101 Seminar</h3>
+                    <p class="event-description">Learn about the publishing process from industry experts. Perfect for aspiring authors.</p>
+                    <div class="event-meta">
+                        <span><i class="fas fa-users"></i> 24 spots left</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Virtual Event</span>
+                    </div>
+                    <a href="#" class="event-button">Register</a>
+                </div>
+            </div>
+            
+            <!-- Event 6 -->
+            <div class="event-card">
+                <img src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Children's Storytime" class="event-image">
+                <div class="event-content">
+                    <div class="event-date"><i class="fas fa-calendar-alt"></i> July 27, 2025 | 11:00 AM EST</div>
+                    <h3 class="event-title">Children's Storytime</h3>
+                    <p class="event-description">Interactive story reading session for children ages 3-8. Includes fun activities and discussions.</p>
+                    <div class="event-meta">
+                        <span><i class="fas fa-users"></i> 40 spots left</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Virtual Event</span>
+                    </div>
+                    <a href="#" class="event-button">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="newsletter">
+        <div class="container">
+            <h2>Stay Updated on Future Events</h2>
+            <p>Subscribe to our newsletter to receive notifications about upcoming events, author interviews, and exclusive content.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" class="newsletter-input" required>
+                <button type="submit" class="newsletter-button">Subscribe</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <h2 class="logo">Ebook World</h2>
+                <p>Dive into the world of ebooks with us. Read, learn, and explore.</p>
+                <div class="footer-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ebook World | All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
